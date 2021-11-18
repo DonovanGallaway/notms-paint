@@ -6,6 +6,30 @@ const Canvas = (props) => {
   const contextRef = useRef(null)
   const [isDrawing, setIsDrawing] = useState(false)
 
+  const [canvasConfig, setConfig] = useState({
+    lineCap: 'round',
+    strokeStyle: 'black',
+    lineWidth: 5
+})
+
+  const setContext = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d')
+    context.lineCap = canvasConfig.lineCap
+    context.strokeStyle = canvasConfig.strokeStyle
+    context.lineWidth = canvasConfig.lineWidth
+    contextRef.current = context;
+  }
+
+  const redState = () => {
+    setConfig({
+      lineCap: 'round',
+      strokeStyle: 'red',
+      lineWidth: 5
+  })
+    setContext()
+  }
+
   useEffect(()=>{
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth * 2;
@@ -15,10 +39,11 @@ const Canvas = (props) => {
 
     const context = canvas.getContext('2d')
     context.scale(2,2)
-    context.lineCap = 'round'
-    context.strokeStyle = 'black'
-    context.lineWidth = 5
+    context.lineCap = canvasConfig.lineCap
+    context.strokeStyle = canvasConfig.strokeStyle
+    context.lineWidth = canvasConfig.lineWidth
     contextRef.current = context;
+    redState()
   }, [])
 
   const startDrawing = ({nativeEvent}) => {
@@ -42,6 +67,7 @@ const Canvas = (props) => {
   }
   return (
       <div className='canvas'>
+        <button onClick={() => {redState()}}>Red Color</button>
       <canvas
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
