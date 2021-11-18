@@ -9,9 +9,12 @@ const Canvas = (props) => {
   const [canvasConfig, setConfig] = useState({
     lineCap: 'round',
     strokeStyle: 'black',
-    lineWidth: 5
+    lineWidth: 5,
+    current: ()=>{}
 })
 
+
+  // Color Mods
   const setContext = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d')
@@ -21,16 +24,61 @@ const Canvas = (props) => {
     contextRef.current = context;
   }
 
-  const redState = () => {
-    setConfig({
-      lineCap: 'round',
-      strokeStyle: 'red',
-      lineWidth: 5
-  })
-    setContext()
+        const redState = () => {
+            setConfig({
+            lineCap: 'round',
+            strokeStyle: 'red',
+            lineWidth: 5,
+            current: redState
+        })
+            setContext()
+        }
+        const blueState = () => {
+            setConfig({
+            lineCap: 'round',
+            strokeStyle: 'blue',
+            lineWidth: 5,
+            current: blueState
+        })
+            setContext()
+        }
+        const greenState = () => {
+            setConfig({
+            lineCap: 'round',
+            strokeStyle: 'green',
+            lineWidth: 5,
+            current: greenState
+        })
+            setContext()
+        }
+        const blackState = () => {
+            setConfig({
+            lineCap: 'round',
+            strokeStyle: 'black',
+            lineWidth: 5,
+            current: blackState
+        })
+            setContext()
+        }
+        const whiteState = () => {
+            setConfig({
+            lineCap: 'round',
+            strokeStyle: 'white',
+            lineWidth: 5,
+            current: whiteState
+        })
+            setContext()
+        }
+        const grayState = () => {
+            setConfig({
+            lineCap: 'round',
+            strokeStyle: 'gray',
+            lineWidth: 5,
+            current: grayState
+        })
+            setContext()
+        }
 
-    
-  }
 
   useEffect(()=>{
     const canvas = canvasRef.current;
@@ -41,11 +89,11 @@ const Canvas = (props) => {
 
     const context = canvas.getContext('2d')
     context.scale(2,2)
-    context.lineCap = canvasConfig.lineCap
-    context.strokeStyle = canvasConfig.strokeStyle
-    context.lineWidth = canvasConfig.lineWidth
-    contextRef.current = context;
-    redState()
+    canvasConfig.current()
+    setContext()
+    canvasConfig.current()
+    setContext()
+    
   }, [])
 
   const startDrawing = ({nativeEvent}) => {
@@ -69,7 +117,12 @@ const Canvas = (props) => {
   }
   return (
       <div className='canvas'>
-        <button onClick={() => {redState()}}>Red Color</button>
+        <button onClick={()=>{redState();redState()}}>Red Color</button>
+        <button onClick={()=>blueState()}>Blue Color</button>
+        <button onClick={()=>greenState()}>Green Color</button>
+        <button onClick={()=>blackState()}>Black Color</button>
+        <button onClick={()=>whiteState()}>Erase Color</button>
+        <button onClick={()=>grayState()}>Gray Color</button>
       <canvas
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
