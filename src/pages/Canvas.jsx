@@ -6,12 +6,15 @@ const Canvas = (props) => {
   const contextRef = useRef(null)
   const [isDrawing, setIsDrawing] = useState(false)
 
+  const [penColor, setPenColor] = useState("black")
+  const [penWidth, setPenWidth] = useState(5)
+
   const [canvasConfig, setConfig] = useState({
     lineCap: 'round',
-    strokeStyle: 'black',
-    lineWidth: 5
+    strokeStyle: penColor,
+    lineWidth: penWidth
 })
-
+  
   const setContext = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d')
@@ -55,8 +58,8 @@ const Canvas = (props) => {
   }, [])
 
   const startDrawing = ({nativeEvent}) => {
-    const {offsetX, offsetY} = nativeEvent
     setIsDrawing(true)
+    const {offsetX, offsetY} = nativeEvent
     contextRef.current.beginPath()
     contextRef.current.moveTo(offsetX, offsetY)
   }
@@ -88,6 +91,8 @@ const Canvas = (props) => {
         <button onClick={() => strokeState(20)}>Thick</button>
         <button onClick={() => strokeState(5)}>Regular</button>
         <button onClick={() => strokeState(2)}>Thin</button>
+        <input type="color" onInput={(event) => colorState(event.target.value)}/>
+        <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
       <canvas
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
