@@ -1,0 +1,98 @@
+/////////////////
+// Imports
+/////////////////
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;600&display=swap');
+
+/////////////////
+// Variables
+/////////////////
+$background: #2b2b2b;
+$light-blue: #BCCCDC;
+$blue-grey: #627d98;
+$dark-blue: #102a43;
+
+/////////////////
+// Mixins
+/////////////////
+@mixin bold-font {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 600;
+}
+
+@mixin medium-font {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 400;
+}
+
+@mixin light-font {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 300;
+}
+
+/////////////////
+// Base Styling
+/////////////////
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: .5s;
+}
+
+body {
+    background-color: $background;
+    color: white;
+    @include medium-font();
+}
+
+a {
+    text-decoration: none;
+    color: white;
+
+    :hover {
+        color: $blue-grey;
+    }
+}
+
+
+/////////////////
+// Header
+/////////////////
+h1 {
+    text-align: center;
+    margin: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+
+    div {
+        margin: 10px 20px;
+    }
+}
+
+/////////////////
+// Draw Page
+/////////////////
+canvas {
+    display: block;
+    margin: 10px auto;
+    background-color: rgb(236, 236, 236);
+    box-shadow: 4px 4px 15px  black;
+    border-radius: 5px;
+}
+
+/////////////////
+// Footer
+/////////////////
+footer {
+    margin: 30px auto;
+    text-align: center;
+    @include light-font();
+    opacity: 0.8;
+
+    a:hover {
+        color: $blue-grey;
+    }
+}
