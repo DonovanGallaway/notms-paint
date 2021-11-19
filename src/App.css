@@ -1,9 +1,0 @@
-nav {
-  display: flex;
-  justify-content: space-around;
-}
-
-canvas {
-  display: block;
-  margin: 10px auto;
-}
