@@ -38,6 +38,13 @@ const Canvas = (props) => {
     setContext()
   }
 
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d')
+    context.fillStyle = "rgb(236, 236, 236)"
+    context.fillRect(0, 0, window.innerWidth - 60, window.innerHeight * 0.8)
+  }
+
   useEffect(()=>{
     // variables to store width of canvas
     const width = window.innerWidth - 60;
@@ -93,6 +100,7 @@ const Canvas = (props) => {
         <button onClick={() => strokeState(2)}>Thin</button>
         <input type="color" onInput={(event) => colorState(event.target.value)}/>
         <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
+        <button onClick={clearCanvas}>Clear</button>
       <canvas
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
