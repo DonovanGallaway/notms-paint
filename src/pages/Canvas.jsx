@@ -21,12 +21,17 @@ const Canvas = (props) => {
     contextRef.current = context;
   }
 
-  const redState = () => {
-    setConfig({
-      lineCap: 'round',
-      strokeStyle: 'red',
-      lineWidth: 5
-  })
+  const colorState = (color) => {
+    const newState = {...canvasConfig}
+    newState.strokeStyle = color;
+    setConfig(newState)
+    setContext()
+  }
+
+  const strokeState = (width) => {
+    const newState = {...canvasConfig}
+    newState.lineWidth = width;
+    setConfig(newState)
     setContext()
   }
 
@@ -47,7 +52,6 @@ const Canvas = (props) => {
     context.strokeStyle = 'black'
     context.lineWidth = 5
     contextRef.current = context;
-    redState()
   }, [])
 
   const startDrawing = ({nativeEvent}) => {
@@ -66,6 +70,8 @@ const Canvas = (props) => {
     if(!isDrawing){
       return
     }
+    colorState()
+    strokeState()
     const {offsetX, offsetY} = nativeEvent;
     contextRef.current.lineTo(offsetX, offsetY)
     contextRef.current.stroke()
@@ -75,7 +81,13 @@ const Canvas = (props) => {
 
   return (
       <div className='canvas'>
-        <button onClick={() => {redState()}}>Red Color</button>
+        <button onClick={() => colorState("red")}>Red Color</button>
+        <button onClick={() => colorState("green")}>Green Color</button>
+        <button onClick={() => colorState("blue")}>Blue Color</button>
+        <button onClick={() => colorState("yellow")}>Yellow Color</button>
+        <button onClick={() => strokeState(20)}>Thick</button>
+        <button onClick={() => strokeState(5)}>Regular</button>
+        <button onClick={() => strokeState(2)}>Thin</button>
       <canvas
         onMouseDown={startDrawing}
         onMouseUp={finishDrawing}
