@@ -20,7 +20,7 @@ const Canvas = (props) => {
   const [penWidth, setPenWidth] = useState(5)
 
   const [canvasConfig, setConfig] = useState({
-    lineCap: 'round',
+    lineCap: 'square',
     strokeStyle: penColor,
     lineWidth: penWidth
 })
@@ -93,8 +93,8 @@ const Canvas = (props) => {
       // Fill Tool Testing (Dev Only)
       ///////////////////////////////////////////////////////////////////////////////////////
       const targetColor = hexToRgb(canvasConfig.strokeStyle) // Convert hex to rgb to interact with bitmap
-      console.log('hex color is', canvasConfig.strokeStyle)
-      console.log('targetColor is', targetColor)
+      // console.log('hex color is', canvasConfig.strokeStyle)
+      // console.log('targetColor is', targetColor)
       const fillR = targetColor[0]
       const fillG = targetColor[1]
       const fillB = targetColor[2]
@@ -121,7 +121,10 @@ const Canvas = (props) => {
           const r = imgData.data[testPos];	
           const g = imgData.data[testPos+1];	
           const b = imgData.data[testPos+2];
-          const a = imgData.data[testPos+3]
+
+          // console.log(`startR is ${startR}, r is ${r}, and the boolean is ${startR===r}`)
+          // console.log(`startG is ${startG}, g is ${g}, and the boolean is ${startG===g}`)
+          // console.log(`startB is ${startB}, b is ${b}, and the boolean is ${startB===b}`)
           
           return (r === startR && g === startG && b === startB);
         }
@@ -137,41 +140,41 @@ const Canvas = (props) => {
         //////////////////////////////////////////////////////////
         // Body of Function
         //////////////////////////////////////////////////////////
-        
+        console.log('working')
         while(pixelStack.length) // while loop and this pop is a clever way of iterating over an unknown number of items
         {
-          const newPos = pixelStack.pop();
-          let x = newPos[0]
-          let y = newPos[1]
+          var newPos, x, y, pixelPos, reachLeft, reachRight
+          newPos = pixelStack.pop();
+          x = newPos[0]
+          y = newPos[1]
           // console.log(x,y)
 
-          let pixelPos = (y*canvas.width + x) * 4
+          pixelPos = (y*canvas.width + x) * 4
           while(y-- >= 0 && matchStartColor(pixelPos, pixelPos - canvas.width * 4))
           {
             pixelPos -= canvas.width * 4;
           }
           pixelPos += canvas.width * 4;
           ++y;
+          
 
-          let reachLeft = false;
-          let reachRight = false;
+          reachLeft = false;
+          reachRight = false;
           while (y++ < canvas.height -1 && matchStartColor(pixelPos, pixelPos + canvas.width * 4)){
             colorPixel(pixelPos)
             if (x>0){
-              if(matchStartColor(pixelPos, pixelPos-4)){
+              if(!matchStartColor(pixelPos, pixelPos-4)){
                 if(reachLeft === false){
                   pixelStack.push([x-1, y])
-                  console.log(pixelStack)
                   reachLeft = true
                 }
               } else if (reachLeft){
-                console.log('for some reason I refuse to reach left')
                 reachLeft = false
               }
             }
             if (x < canvas.width-1){
-              if(matchStartColor(pixelPos, pixelPos+4)){
-                if(!reachRight){
+              if(!matchStartColor(pixelPos, pixelPos+4)){
+                if(reachRight === false){
                   pixelStack.push([x+1, y])
                   reachRight = true
                 } else if (reachRight) {
@@ -179,9 +182,11 @@ const Canvas = (props) => {
                 }
               }
             }
+            
             pixelPos += canvas.width * 4          
         }
         context.putImageData(imgData, 0,0)
+        console.log('all done')
 
     }
   }
