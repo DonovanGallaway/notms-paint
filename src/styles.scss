@@ -90,6 +90,33 @@ input[type="color"] {
 	height: 32px;
 }
 
+input[type=range]{
+    -webkit-appearance: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 5px;
+    margin: 10px;
+    background-color: white;
+    box-shadow: 4px 4px 15px  black;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+    background: $blue-grey;
+    cursor: pointer;
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+    background: $blue-grey;
+    cursor: pointer;
+}
+
 /////////////////
 // Footer
 /////////////////
