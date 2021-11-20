@@ -3,6 +3,7 @@ import Canvas from './pages/Canvas'
 import {Routes, Route} from 'react-router-dom'
 import Home from './pages/Home'
 import Community from './pages/Community'
+import Footer from './components/Footer'
 import './App.css'
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <Route exact path='/draw' element={<Canvas/>}/>
         <Route exact path='/community' element={<Community/>}/>
       </Routes>
-      <h1>Footer</h1>
+      <Footer/>
     </div>
   );
 }
