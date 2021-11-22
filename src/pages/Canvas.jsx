@@ -90,7 +90,7 @@ const Canvas = (props) => {
     } else if (currentTool.tool==='fill'){
       
       ///////////////////////////////////////////////////////////////////////////////////////
-      // Fill Tool Testing (Dev Only)
+      // Fill Tool 
       ///////////////////////////////////////////////////////////////////////////////////////
       const targetColor = hexToRgb(canvasConfig.strokeStyle) // Convert hex to rgb to interact with bitmap
       // console.log('hex color is', canvasConfig.strokeStyle)
@@ -128,6 +128,14 @@ const Canvas = (props) => {
           
           return (r === startR && g === startG && b === startB);
         }
+
+        const matchTargetColor = (pixelPos) => {
+          const startR = imgData.data[pixelPos]
+          const startG = imgData.data[pixelPos+1]
+          const startB = imgData.data[pixelPos+2]
+
+          return (startR === fillR && startG === fillG && startB === fillB)
+        }
         //////////////////////////////////////////////////////////
         // Function to change color
         //////////////////////////////////////////////////////////
@@ -150,7 +158,7 @@ const Canvas = (props) => {
           // console.log(x,y)
 
           pixelPos = (y*canvas.width + x) * 4
-          while(y-- >= 0 && matchStartColor(pixelPos, pixelPos - canvas.width * 4))
+          while(y-- >= 0 && matchStartColor(pixelPos, pixelPos - canvas.width * 4) && !matchTargetColor(pixelPos))
           {
             pixelPos -= canvas.width * 4;
           }
@@ -160,7 +168,7 @@ const Canvas = (props) => {
 
           reachLeft = false;
           reachRight = false;
-          while (y++ < canvas.height -1 && matchStartColor(pixelPos, pixelPos + canvas.width * 4)){
+          while (y++ < canvas.height -1 && matchStartColor(pixelPos, pixelPos + canvas.width * 4) && !matchTargetColor(pixelPos)){
             colorPixel(pixelPos)
             if (x>0){
               if(!matchStartColor(pixelPos, pixelPos-4)){
@@ -185,10 +193,11 @@ const Canvas = (props) => {
             
             pixelPos += canvas.width * 4          
         }
-        context.putImageData(imgData, 0,0)
-        console.log('all done')
+        
 
     }
+    context.putImageData(imgData, 0,0)
+        console.log('all done')
   }
 }
 
@@ -217,15 +226,15 @@ const Canvas = (props) => {
         <input type="color" onInput={(event) => {colorState(event.target.value)}}/>
         <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
         <button onClick={clearCanvas}>Clear</button>
-      <canvas
-        //// Working drawing func
-        onMouseDown={startDrawing}
-        //// Dev func only
-        // onMouseDown={fillTest}
-        onMouseUp={finishDrawing}
-        onMouseMove={draw}
-        ref={canvasRef}
-      />
+      {currentTool.tool === 'fill'
+      ? <canvas onClick={startDrawing} ref={canvasRef}/>
+      : <canvas
+      onMouseDown={startDrawing}
+      onMouseUp={finishDrawing}
+      onMouseMove={draw}
+      ref={canvasRef}
+    />
+      }
       </div>
   );
 }
