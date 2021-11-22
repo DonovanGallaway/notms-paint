@@ -20,7 +20,7 @@ const Canvas = (props) => {
   const [penWidth, setPenWidth] = useState(5)
 
   const [canvasConfig, setConfig] = useState({
-    lineCap: 'square',
+    lineCap: 'round',
     strokeStyle: penColor,
     lineWidth: penWidth
 })
@@ -170,27 +170,17 @@ const Canvas = (props) => {
           reachRight = false;
           while (y++ < canvas.height -1 && matchStartColor(pixelPos, pixelPos + canvas.width * 4) && !matchTargetColor(pixelPos)){
             colorPixel(pixelPos)
+            if (x < canvas.width){
+              if(!matchStartColor(pixelPos, pixelPos+4)){
+                  pixelStack.push([x+1, y])
+            }
             if (x>0){
               if(!matchStartColor(pixelPos, pixelPos-4)){
-                if(reachLeft === false){
-                  pixelStack.push([x-1, y])
-                  reachLeft = true
-                }
-              } else if (reachLeft){
-                reachLeft = false
-              }
-            }
-            if (x < canvas.width-1){
-              if(!matchStartColor(pixelPos, pixelPos+4)){
-                if(reachRight === false){
-                  pixelStack.push([x+1, y])
-                  reachRight = true
-                } else if (reachRight) {
-                  reachRight = false
-                }
-              }
-            }
+                pixelStack.push([x-1, y])
             
+              }  
+            }
+          }      
             pixelPos += canvas.width * 4          
         }
         
@@ -219,9 +209,14 @@ const Canvas = (props) => {
     contextRef.current.moveTo(offsetX, offsetY)
   }
 
+
+  //////////////////////////////////////////////////////////////////
+  // Circle Tool
+  //////////////////////////////////////////////////////////////////
+
   return (
       <div className='canvas'>
-        <button onClick={() => toolState('fill')}>Fill Test</button>
+        <button onClick={() => toolState('fill')}>Fill</button>
         <button onClick={() => toolState('draw')}>Back to Draw</button>
         <input type="color" onInput={(event) => {colorState(event.target.value)}}/>
         <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
