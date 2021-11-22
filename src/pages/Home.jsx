@@ -1,43 +1,79 @@
 import { Link } from "react-router-dom"
+import {Fade} from "react-awesome-reveal"
 
 const Home = (props) => {
+
     return <div className="landing">
         {/* Description */}
-        <div>
-            <h1>Drawing App</h1>
-            <p>Express yourself with the draw app and create your very own masterpiece.</p>
-        </div>
+        <Fade>
+            <div className="intro">
+                <h1>Scribble.</h1>
+                <p>Express yourself and create your very own masterpiece.</p>
+            </div>
+        </Fade>
 
         {/* Features */}
-        <div>
-            <h2>Features</h2>
-            <ul>
-                <li>Adjust the color and width of your brush</li>
-                <li>Use the fill tool to fill spaces with color.</li>
-                <li>Refresh the canvas with the clear button.</li>
-            </ul>
-        </div>
+        <Fade direction="left" delay="100" triggerOnce>
+            <div className="features">
+                <h2>Features</h2>
+                <ul>
+                    <li>Adjust the color and width of your brush</li>
+                    <li>Use the fill tool to fill spaces with color.</li>
+                    <li>Refresh the canvas with the clear button.</li>
+                </ul>
+            </div>
+        </Fade>
+
         {/* Demo Video */}
         {/* Tutorial */}
-        <h2>How to Use</h2>
+        <Fade direction="right" delay="200" triggerOnce>
+            <div className="demo">
+                <h2>How to Use</h2>
+            </div>
+        </Fade>
+        
         {/* Link to live app */}
-        <div>
-            <p>So, are you feeling creative?</p>
-            <Link to="/draw">
-                <button>Start Drawing</button>
-            </Link>
-        </div>
+        <Fade direction="left" delay="300" triggerOnce>
+            <div className="start">
+                <p>So, are you feeling creative?</p>
+                <Link to="/draw">
+                    <button>Start Drawing</button>
+                </Link>
+            </div>
+        </Fade>
+
         {/* Meet the Engineers */}
+        <Fade>
         <div className="engineers-container">
             <h2>Meet the Engineers</h2>
-            <div className="engineer">
-                <h4>Donovan Gallaway</h4>
-            </div>
-            <div className="engineer">
-                <h4>Sarah Carter</h4>
+            <div className="engineer-flex">
+                <div className="engineer">
+                    <h4>Donovan Gallaway</h4>
+                    <img/>
+                    <div className="socials">
+                        <a href="https://www.linkedin.com/in/donovan-gallaway/">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/DonovanGallaway">
+                            <i class="fab fa-github-square"></i>
+                        </a>
+                    </div>
+                </div>
+                <div className="engineer">
+                    <h4>Sarah Carter</h4>
+                    <img src="https://imgur.com/dlPUNsJ.png" alt="picture of sarah carter" />
+                    <div className="socials">
+                        <a href="https://www.linkedin.com/in/scarterwebdev/">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/sarahecarter">
+                            <i class="fab fa-github-square"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-
+        </Fade>
     </div>
 }
 
