@@ -151,7 +151,7 @@ const Canvas = (props) => {
         console.log('working')
         while(pixelStack.length) // while loop and this pop is a clever way of iterating over an unknown number of items
         {
-          var newPos, x, y, pixelPos, reachLeft, reachRight
+          var newPos, x, y, pixelPos
           newPos = pixelStack.pop();
           x = newPos[0]
           y = newPos[1]
@@ -165,9 +165,6 @@ const Canvas = (props) => {
           pixelPos += canvas.width * 4;
           ++y;
           
-
-          reachLeft = false;
-          reachRight = false;
           while (y++ < canvas.height -1 && matchStartColor(pixelPos, pixelPos + canvas.width * 4) && !matchTargetColor(pixelPos)){
             colorPixel(pixelPos)
             if (x < canvas.width){

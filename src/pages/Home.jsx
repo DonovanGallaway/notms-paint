@@ -49,7 +49,7 @@ const Home = (props) => {
             <div className="engineer-flex">
                 <div className="engineer">
                     <h4>Donovan Gallaway</h4>
-                    <img/>
+                    <img src="https://i.imgur.com/g1hVCnu.png" alt="donovan gallaway"/>
                     <div className="socials">
                         <a href="https://www.linkedin.com/in/donovan-gallaway/">
                             <i class="fab fa-linkedin"></i>
