@@ -49,6 +49,7 @@ const Canvas = (props) => {
   }
 
   const toolState = (tool) => {
+    const canvas = canvasRef.current;
     const newState = {...currentTool}
     newState.tool = tool
     setTool(newState)
@@ -213,11 +214,13 @@ const Canvas = (props) => {
 
   return (
       <div className='canvas'>
-        <button onClick={() => toolState('fill')}>Fill</button>
-        <button onClick={() => toolState('draw')}>Back to Draw</button>
-        <input type="color" onInput={(event) => {colorState(event.target.value)}}/>
-        <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
-        <button onClick={clearCanvas}>Clear</button>
+        <div className="toolbar">
+          <button onClick={() => toolState('fill')}><i class="fas fa-fill-drip"></i> Fill</button>
+          <button onClick={() => toolState('draw')}><i class="fas fa-paint-brush"></i> Paint</button>
+          <input type="color" onInput={(event) => {colorState(event.target.value)}}/>
+          <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
+          <button onClick={clearCanvas}>Clear</button>
+        </div>
       {currentTool.tool === 'fill'
       ? <canvas onClick={startDrawing} ref={canvasRef}/>
       : <canvas
@@ -225,7 +228,7 @@ const Canvas = (props) => {
       onMouseUp={finishDrawing}
       onMouseMove={draw}
       ref={canvasRef}
-    />
+      />
       }
       </div>
   );

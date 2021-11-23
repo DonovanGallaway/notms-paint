@@ -159,23 +159,33 @@ nav.show {
     text-align: center;
 
     .engineer {
-        margin: 20px 40px;
+        margin: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        h4 {
-            @include medium-font();
-        }
+        background: white;
+        opacity: 0.9;
+        padding: 10px;
+        color: $background;
+        border-radius: 5px;
+        box-shadow: 4px 4px 15px  black;
+        width: 300px;
         
         i {
+            color: $background;
             margin: 10px;
             font-size: 1.8em;
+        }
+
+        i:hover {
+            color: $blue-grey;
         }
 
         img {
             width: 250px;
             margin: 10px;
+            border: 5px solid $background;
+            border-radius: 50%;
         }
     }
 }
@@ -189,6 +199,37 @@ canvas {
     background-color: rgb(236, 236, 236);
     box-shadow: 4px 4px 15px  black;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+
+    input, button {
+        @include medium-font();
+        margin: 5px;
+        border-radius: 5px;
+        box-shadow: 4px 4px 15px  black;
+        cursor: pointer;
+    }
+
+    button {
+        background: white;
+        border: none;
+        padding: 8px;
+
+        i {
+            transition: 0s;
+        }
+    }
+
+    button:hover {
+        background: $blue-grey;
+        color: white;
+    }
 }
 
 input[type="color"] {
