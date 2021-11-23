@@ -1,5 +1,28 @@
+import {useState, useEffect} from 'react'
+
 const Community = (props) => {
-    return <h1>This is the Community Page</h1>
+
+    
+
+    const gallery = props.gallery
+
+
+    useEffect(()=>{
+        props.getGallery()
+    },[])
+
+
+    if (gallery && gallery.length){
+        return <main>
+            {gallery.map((x)=> {
+                return <div key={x._id}>
+                    <img src={x.dataURL}/>
+                </div>
+            })}
+        </main>
+    } else {
+        return <h1>Loading Gallery...</h1>
+    }
 }
 
 export default Community

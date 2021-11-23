@@ -18,6 +18,8 @@ const Canvas = (props) => {
 
   const [penColor, setPenColor] = useState("#000000")
   const [penWidth, setPenWidth] = useState(5)
+  const [image, setImage] = useState(null)
+
 
   const [canvasConfig, setConfig] = useState({
     lineCap: 'round',
@@ -184,6 +186,7 @@ const Canvas = (props) => {
         
 
     }
+    console.log(imgData)
     context.putImageData(imgData, 0,0)
         console.log('all done')
   }
@@ -207,10 +210,26 @@ const Canvas = (props) => {
     contextRef.current.moveTo(offsetX, offsetY)
   }
 
+  const saveImage = async (dataURL) => {
+    console.log(props.URL)
+    const newState = dataURL
+    setImage(newState)
+    await fetch(props.URL, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({dataURL: image})
+  })
+}
 
-  //////////////////////////////////////////////////////////////////
-  // Circle Tool
-  //////////////////////////////////////////////////////////////////
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const canvas = canvasRef.current
+    const dataURL = canvas.toDataURL()
+    saveImage(dataURL)
+    props.getGallery()
+  }
 
   return (
       <div className='canvas'>
@@ -220,6 +239,8 @@ const Canvas = (props) => {
           <input type="color" onInput={(event) => {colorState(event.target.value)}}/>
           <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
           <button onClick={clearCanvas}>Clear</button>
+          <form onSubmit={handleSubmit}><input type="submit" value="Save Image"/></form>
+          
         </div>
       {currentTool.tool === 'fill'
       ? <canvas onClick={startDrawing} ref={canvasRef}/>
