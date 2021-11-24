@@ -216,6 +216,13 @@ canvas {
         cursor: pointer;
     }
 
+    #submit {
+        padding: 8px;
+        border: none;
+        background: $blue-grey;
+        color: white;
+    }
+
     button {
         background: white;
         border: none;
@@ -229,6 +236,10 @@ canvas {
     button:hover {
         background: $blue-grey;
         color: white;
+    }
+
+    #submit:hover {
+        background: $dark-blue;
     }
 }
 
