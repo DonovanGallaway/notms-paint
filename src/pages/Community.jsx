@@ -13,7 +13,7 @@ const Community = (props) => {
 
 
     if (gallery && gallery.length){
-        return <main>
+        return <main className="community">
             {gallery.map((x)=> {
                 return <div key={x._id}>
                     <img src={x.dataURL}/>
