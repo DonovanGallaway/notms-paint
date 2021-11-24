@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import {Link} from "react-router-dom"
 
 const Community = (props) => {
 
@@ -13,7 +14,12 @@ const Community = (props) => {
 
 
     if (gallery && gallery.length){
-        return <main>
+        return <main className="community">
+            <h1>The Scribble Community Art Board</h1>
+            <p>Want to add your work to the board?</p>
+            <Link to="/draw">
+                    <button>Start Drawing</button>
+            </Link>
             {gallery.map((x)=> {
                 return <div key={x._id}>
                     <img src={x.dataURL}/>
