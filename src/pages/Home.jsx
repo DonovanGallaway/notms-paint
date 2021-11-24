@@ -28,7 +28,8 @@ const Home = (props) => {
         {/* Tutorial */}
         <Fade direction="right" delay="200" triggerOnce>
             <div className="demo">
-                <h2>How to Use</h2>
+                <h2>How to Use</h2><br/>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/PUAebzoZHZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </Fade>
         
@@ -37,7 +38,7 @@ const Home = (props) => {
             <div className="start">
                 <p>So, are you feeling creative?</p>
                 <Link to="/draw">
-                    <button>Start Drawing</button>
+                    <button style={{fontSize: "36px", fontWeight: "bold"}}>Start Drawing</button>
                 </Link>
             </div>
         </Fade>

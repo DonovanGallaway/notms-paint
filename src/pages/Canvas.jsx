@@ -217,7 +217,7 @@ const Canvas = (props) => {
     updateImage()
   }
 
-  const saveImage = async (dataURL) => {
+  const saveImage = async () => {
     await fetch(props.URL, {
       method: "post",
       headers: {

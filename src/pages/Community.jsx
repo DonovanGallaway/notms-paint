@@ -20,11 +20,16 @@ const Community = (props) => {
             <Link to="/draw">
                     <button>Start Drawing</button>
             </Link>
-            {gallery.map((x)=> {
-                return <div key={x._id}>
+            <div className="gallery">
+            {gallery.map((x, index)=> {
+                if (x.dataURL){
+                    return <div className="gallery-image" key={x._id}>
                     <img src={x.dataURL}/>
-                </div>
+                    </div>
+                }
+                
             })}
+            </div>
         </main>
     } else {
         return <h1>Loading Gallery...</h1>

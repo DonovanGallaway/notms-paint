@@ -336,6 +336,21 @@ footer {
 }
 
 /////////////////
+// Gallery Page
+/////////////////
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.gallery-image img{
+    width: 30vw;
+    margin: 1em;
+}
+
+/////////////////
 // Media Queries
 /////////////////
 
