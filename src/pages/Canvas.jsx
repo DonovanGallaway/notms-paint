@@ -192,6 +192,12 @@ const Canvas = (props) => {
   }
 }
 
+  const updateImage = () => {
+    const canvas = canvasRef.current
+    const dataURL = canvas.toDataURL()
+    setImage(dataURL)
+  }
+
   const finishDrawing = () => {
     contextRef.current.closePath()
     setIsDrawing(false)
@@ -208,12 +214,10 @@ const Canvas = (props) => {
     contextRef.current.stroke()
     contextRef.current.beginPath()
     contextRef.current.moveTo(offsetX, offsetY)
+    updateImage()
   }
 
   const saveImage = async (dataURL) => {
-    console.log(props.URL)
-    const newState = dataURL
-    setImage(newState)
     await fetch(props.URL, {
       method: "post",
       headers: {
@@ -225,9 +229,7 @@ const Canvas = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const canvas = canvasRef.current
-    const dataURL = canvas.toDataURL()
-    saveImage(dataURL)
+    saveImage(image)
     props.getGallery()
   }
 
@@ -239,7 +241,7 @@ const Canvas = (props) => {
           <input type="color" onInput={(event) => {colorState(event.target.value)}}/>
           <input type="range" min="2" max="75" defaultValue="5" onChange={(event) => strokeState(event.target.value)}/>
           <button onClick={clearCanvas}>Clear</button>
-          <form onSubmit={handleSubmit}><input type="submit" value="Save Image"/></form>
+          <form onSubmit={handleSubmit}><input type="submit" value="Save Image" id="submit"/></form>
           
         </div>
       {currentTool.tool === 'fill'
