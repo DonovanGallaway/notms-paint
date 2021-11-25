@@ -32,7 +32,7 @@ const Community = (props) => {
             </div>
         </main>
     } else {
-        return <h1>Loading Gallery...</h1>
+        return <h1 className="loading">Loading Gallery...</h1>
     }
 }
 
