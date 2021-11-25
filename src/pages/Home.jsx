@@ -34,7 +34,7 @@ const Home = (props) => {
         </Fade>
         
         {/* Link to live app */}
-        <Fade direction="left" delay="300" triggerOnce>
+        <Fade direction="left" triggerOnce>
             <div className="start">
                 <p>So, are you feeling creative?</p>
                 <Link to="/draw">
@@ -74,6 +74,12 @@ const Home = (props) => {
                 </div>
             </div>
         </div>
+        </Fade>
+
+
+                {/* Link to Repo */}
+        <Fade direction="right" triggerOnce>
+           <a href="https://github.com/DonovanGallaway/notms-paint" className="repo-link">Visit the project repo on GitHub <i class="fab fa-github-square"></i></a>
         </Fade>
     </div>
 }

@@ -140,7 +140,7 @@ nav.show {
         margin: 10px;
         outline: none;
         border: none;
-        padding: 8px;
+        padding: 10px;
         @include medium-font();
         background: $blue-grey;
         color: white;
@@ -154,8 +154,23 @@ nav.show {
     }
 }
 
+.repo-link {
+    display: block;
+    margin: 40px auto;
+    @include light-font();
+    font-size: 0.9em;
+
+    i {
+        transition: 0s;
+    }
+}
+
+.repo-link:hover {
+    color: $blue-grey;
+}
+
 .engineers-container {
-    margin: 30px 10px;
+    margin: 50px 10px;
     text-align: center;
 
     .engineer {
@@ -320,6 +335,10 @@ input[type=range]::-moz-range-thumb {
     }
 }
 
+.loading {
+    text-align: center;
+}
+
 /////////////////
 // Footer
 /////////////////
@@ -343,6 +362,7 @@ footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .gallery-image img{
